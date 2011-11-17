@@ -22,7 +22,7 @@ public class RandomFileChangerTest {
 
     private static final String SIMPLE_DIR = "testfiledirectory";
     private static final String SEPARATOR = System.getProperty("file.separator");
-    
+
     @Test
     public void shouldReadNumberOfFilesInDirectory() throws Exception {
 	RandomFileChanger fileChanger = new RandomFileChanger(new File(SIMPLE_DIR));
@@ -90,7 +90,7 @@ public class RandomFileChangerTest {
 	    assertTrue(fileEntry.isTouched());
 	}
     }
-    
+
     @Test
     public void shouldFailGracefullyWithNull() throws Exception {
 	File mainoutput = redirectOutputToFile();
@@ -143,11 +143,11 @@ public class RandomFileChangerTest {
     @Test
     public void shouldFailGracefullyWithMoreThan2arguments() throws Exception {
 	File mainoutput = redirectOutputToFile();
-	RandomFileChanger.main(new String[] { "--test", "1", "d"});
+	RandomFileChanger.main(new String[] { "--test", "1", "d" });
 	File disclaimer = redirectOutputToFile();
 	RandomFileChanger.printDisclaimer();
 	assertFileEquals(readFile(disclaimer), readFile(mainoutput));
-	
+
 	cleanup(disclaimer);
 	cleanup(mainoutput);
 
@@ -156,43 +156,48 @@ public class RandomFileChangerTest {
     @Test
     public void shouldFailGracefullyWithInvalidMode() throws Exception {
 	File mainoutput = redirectOutputToFile();
-	RandomFileChanger.main(new String[] { "--invalid", "1"});
+	RandomFileChanger.main(new String[] { "--invalid", "1" });
 	File disclaimer = redirectOutputToFile();
 	RandomFileChanger.printDisclaimer();
 	assertFileEquals(readFile(disclaimer), readFile(mainoutput));
-	
+
 	cleanup(disclaimer);
 	cleanup(mainoutput);
 
     }
-    
+
     @Test
     public void shouldListCorrectNumberOfFilesInTest() throws Exception {
 	File mainoutput = redirectOutputToFile();
-	RandomFileChanger.main(new String[] { "--test", "2"});
+	RandomFileChanger.main(new String[] { "--test", "2" });
 	List<String> outputLines = readFile(mainoutput);
-	assertEquals(2, outputLines.size());	
+	assertEquals(2, outputLines.size());
 	cleanup(mainoutput);
 
     }
-    
+
     @Test
     public void shouldListCorrectNumberOfFilesInChange() throws Exception {
 	File mainoutput = redirectOutputToFile();
-	RandomFileChanger.main(new String[] { "--change", "0"});
+	RandomFileChanger.main(new String[] { "--change", "0" });
 	List<String> outputLines = readFile(mainoutput);
-	assertEquals(0, outputLines.size());	
+	assertEquals(0, outputLines.size());
 	cleanup(mainoutput);
     }
 
     
-    private static void assertFileEquals(List<String> file1, List<String> file2){
+    
+    
+    
+    
+    
+    private static void assertFileEquals(List<String> file1, List<String> file2) {
 	assertEquals(file1.size(), file2.size());
 	for (int i = 0; i < file1.size(); i++) {
 	    assertEquals(file1.get(i), file2.get(i));
 	}
     }
-    
+
     private List<String> readFile(File file) throws IOException {
 	List<String> buffer = new ArrayList<String>();
 	Scanner scanner = new Scanner(file);
