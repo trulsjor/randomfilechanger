@@ -39,6 +39,12 @@ public class RandomFileChangerTest {
 	}
 
 	@Test
+	public void shouldIgnoreGifFile() throws Exception {
+		RandomFileChanger fileChanger = new RandomFileChanger(new File(SIMPLE_DIR));
+		assertNull(fileChanger.findFile(SIMPLE_DIR + SEPARATOR + ".gif"));
+	}
+	
+	@Test
 	public void shouldIgnoredotSettings() throws Exception {
 		RandomFileChanger fileChanger = new RandomFileChanger(new File(SIMPLE_DIR));
 		assertNull(fileChanger.findFile(SIMPLE_DIR + SEPARATOR + ".settings"));
@@ -101,6 +107,7 @@ public class RandomFileChangerTest {
 		new File(dir1, "file2").createNewFile();
 		new File(dir1, "file3").createNewFile();
 		new File(dir1, "file4").createNewFile();
+		new File(dir1, "image.gif").createNewFile();
 		
 		File subdir = new File(dir1, "subdir");
 		subdir.mkdir();
