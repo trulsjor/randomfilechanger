@@ -15,7 +15,7 @@ public class FileDB {
     private Map<Integer, FileEntry> db = new HashMap<Integer, FileEntry>();
 
     private List<String> invalidDirectories = Arrays.asList(".git", "target");
-    private List<String> invalidFileNames = Arrays.asList(".class", ".gif", ".jpg", ".jpeg", ".png");
+    private List<String> invalidFileNames = Arrays.asList(".class", ".gif", ".jpg", ".jpeg", ".png", ".bat", ".sh", ".wsdl");
     private static final String SEPARATOR = System.getProperty("file.separator");
 
     public FileDB(File directory) {
