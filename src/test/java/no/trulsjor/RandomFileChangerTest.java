@@ -63,7 +63,7 @@ public class RandomFileChangerTest {
 	}
 
 	@Test
-	public void shouldPick10RandomFiles() throws Exception {
+	public void shouldPick2RandomFiles() throws Exception {
 		RandomFileChanger fileChanger = new RandomFileChanger(new File(SIMPLE_DIR));
 		List<FileEntry> randomFiles = fileChanger.getRandomFiles(2);
 		assertEquals(2, randomFiles.size());

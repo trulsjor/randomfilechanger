@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static no.trulsjor.randomfilechanger.SystemConstants.SEPARATOR;
+
 public class FileDB {
 
 	private final File directory;
@@ -16,7 +18,7 @@ public class FileDB {
 
 	private List<String> invalidDirectories = Arrays.asList(".git", "target");
 	private List<String> invalidFileNames = Arrays.asList(".class", ".gif", ".jpg", ".jpeg", ".png", ".bat", ".sh", ".wsdl");
-	private static final String SEPARATOR = System.getProperty("file.separator");
+	
 
 	public FileDB(File directory) {
 		this.directory = directory;
