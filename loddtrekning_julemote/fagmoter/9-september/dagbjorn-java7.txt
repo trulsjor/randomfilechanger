@@ -1,0 +1,2 @@
+hvem: Dagbjørn 
+hva: Java7

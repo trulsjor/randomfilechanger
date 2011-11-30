@@ -5,10 +5,15 @@ import static no.trulsjor.randomfilechanger.SystemConstants.TAB;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class RandomFileChanger {
 
@@ -120,11 +125,40 @@ public class RandomFileChanger {
 	}
     }
 
+    public void printSpeakers(Collection<FileEntry> entries) {
+	TreeMap<String, List<FileEntry>> activityMap = new TreeMap<String, List<FileEntry>>();
+
+	for (FileEntry fileEntry : entries) {
+	    if (activityMap.containsKey(fileEntry.getSpeaker())) {
+		List<FileEntry> activityList = activityMap.get(fileEntry.getSpeaker());
+		activityList.add(fileEntry);
+		activityMap.put(fileEntry.getSpeaker(), activityList);
+	    } else {
+		List<FileEntry> activityList = new ArrayList<FileEntry>();
+		activityList.add(fileEntry);
+		activityMap.put(fileEntry.getSpeaker(), activityList);
+	    }
+	}
+
+	for (String key : activityMap.keySet()) {
+	    System.out.println(key + " : " + activityMap.get(key).size());
+	    for (FileEntry fileEntry : activityMap.get(key)) {
+		System.out.println("   " + fileEntry);
+	    }
+	}
+
+    }
+
     public void printContents(FileEntry fileEntry) {
 	Scanner s = new Scanner(fileEntry.getFileContent());
 	while (s.hasNextLine()) {
 	    System.out.println(TAB + s.nextLine());
 	}
+
+    }
+
+    public List<FileEntry> getAllFiles() {
+	return fileDB.getDB();
     }
 
 }

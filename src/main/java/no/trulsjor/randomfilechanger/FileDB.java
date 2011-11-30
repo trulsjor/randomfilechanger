@@ -75,6 +75,10 @@ public class FileDB {
 	}
 	return subsetFromDir;
     }
+    
+    public List<FileEntry> getDB(){
+	return new ArrayList<FileEntry>(db.values());
+    }
 
     public List<FileEntry> getRandomFiles(final int number) {
 	List<FileEntry> randomFiles = new ArrayList<FileEntry>();

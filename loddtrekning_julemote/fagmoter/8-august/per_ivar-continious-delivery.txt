@@ -1,0 +1,2 @@
+hvem: Per Ivar 
+hva: From Continuous Integration to Continuous Delivery in a distributed environment

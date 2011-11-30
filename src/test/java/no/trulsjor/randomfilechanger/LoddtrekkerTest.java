@@ -1,6 +1,7 @@
 package no.trulsjor.randomfilechanger;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedWriter;
@@ -24,7 +25,7 @@ public class LoddtrekkerTest {
     public void createTestDirectory() throws Exception {
 	File root = new File(SIMPLE_DIR);
 	root.mkdir();
-	File meetings = new File(root, "meetings");
+	File meetings = new File(root, "fagmoter");
 	meetings.mkdir();
 	Locale loc = new Locale("no", "no");
 	String[] months = new DateFormatSymbols(loc).getMonths();
@@ -32,14 +33,12 @@ public class LoddtrekkerTest {
 	    File dir = new File(meetings, i + 1 + "-" + months[i]);
 	    dir.mkdir();
 	    for (int j = 1; j < 5; j++) {
-		File file = new File(dir, "meeting" + j);
+		File file = new File(dir, "bidrag" + j + ".txt");
 		file.createNewFile();
 		BufferedWriter out = new BufferedWriter(new FileWriter(file));
-		out.write("Congratulations!");
+		out.write("hvem: x");
 		out.newLine();
-		out.write("" + dir.getName());
-		out.newLine();
-		out.write("" + file.getName());
+		out.write("hva: y");
 		out.close();
 	    }
 	}
@@ -67,9 +66,17 @@ public class LoddtrekkerTest {
 	assertTrue(relativeStandardDeviation < 0.01); // less than one percent
     }
    
+    
+    @Test
+    public void shouldListAllReal(){
+	RandomFileChanger fileChanger = new RandomFileChanger(new File("loddtrekning_julemote"));
+	List<FileEntry> list = fileChanger.getAllFiles();
+	assertFalse(list.isEmpty());
+	//fileChanger.printSpeakers(list);
+    }
 
     @After
-    public void testdelete() throws Exception {
+    public void deleteSimpleDir() throws Exception {
 	assertTrue(deleteDirectory(new File(SIMPLE_DIR)));
     }
     

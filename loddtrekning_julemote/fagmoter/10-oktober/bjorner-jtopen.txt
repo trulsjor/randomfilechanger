@@ -1,0 +1,2 @@
+hvem: Bjørner 
+hva: JTOpen/IBM toolbox, kommunikasjon mellom Java-programmer og stormaskin

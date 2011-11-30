@@ -5,18 +5,36 @@ import static no.trulsjor.randomfilechanger.SystemConstants.NEWLINE;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.Scanner;
+
+import org.apache.commons.lang.WordUtils;
 
 public class FileEntry {
 
     private int index;
     private File fileName;
     private boolean touched;
+    private String speaker;
+    private String subject;
 
     public FileEntry(int index, File file) {
 	this.index = index;
 	this.fileName = file;
 	this.touched = false;
+	this.speaker = findSpeaker();
+
+    }
+
+    private String findSpeaker() {
+	String speaker = "UNKNOWN";
+	String fileNameAsString = fileName.getName();
+	
+	if (fileNameAsString.contains("-")){
+	    String speakerName =  fileName.getName().substring(0,fileNameAsString.indexOf("-"));
+	    speaker = WordUtils.capitalize(speakerName.replaceAll("_", " "));
+	}
+	return speaker;
     }
 
     public boolean hasFile(File file) {
@@ -48,7 +66,7 @@ public class FileEntry {
 	try {
 	    Scanner reader = new Scanner(fileName);
 	    while (reader.hasNextLine()) {
-		content.append(reader.nextLine() + NEWLINE);
+		content.append(reader.nextLine() + " ");
 	    }
 	} catch (IOException e) {
 	    throw new RuntimeException(e);
@@ -60,8 +78,13 @@ public class FileEntry {
 	return index;
     }
 
+    public String getSpeaker() {
+	return speaker;
+    }
+
     @Override
     public String toString() {
-	return "FileEntry [index=" + index + ", touched=" + touched + ", fileName=" + fileName + "]";
+	return "FileEntry [index=" + index + ", speaker=" + speaker + ", fileName=" + fileName + "]";
     }
+
 }

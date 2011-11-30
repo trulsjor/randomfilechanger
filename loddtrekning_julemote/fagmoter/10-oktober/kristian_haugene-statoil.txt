@@ -1,0 +1,2 @@
+hvem: Kristian Haugene 
+hva: Statoil Poc

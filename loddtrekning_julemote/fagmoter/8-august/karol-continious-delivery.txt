@@ -1,0 +1,2 @@
+hvem: Karol 
+hva: From Continuous Integration to Continuous Delivery in a distributed environment

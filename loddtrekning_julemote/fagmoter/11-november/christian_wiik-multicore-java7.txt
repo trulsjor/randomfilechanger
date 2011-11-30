@@ -1,0 +1,2 @@
+hvem: Christian K. Wiik 
+hva: Samtidighetsproblematikk og programmering for multicore og er på ny i vinden etter release av fork/join framework i Java 7

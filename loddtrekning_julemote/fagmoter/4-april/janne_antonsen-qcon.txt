@@ -1,0 +1,2 @@
+hvem: Janne 
+hva: QCon London
