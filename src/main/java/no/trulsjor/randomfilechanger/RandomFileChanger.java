@@ -7,11 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -20,7 +17,7 @@ public class RandomFileChanger {
     private static final String MESSAGE = "//Hello automation at ";
 
     private enum Mode {
-	ILLEGAL("--illegal"), TEST("--test"), CHANGE("--change");
+	ILLEGAL("--illegal"), PICK("--pick"), CHANGE("--change"), LIST("--list");
 
 	private final String modeCommando;
 
@@ -45,7 +42,7 @@ public class RandomFileChanger {
 	RandomFileChanger randomFileChanger = new RandomFileChanger(new File("."));
 	List<FileEntry> fileEntries;
 	switch (validateArgs(args)) {
-	case TEST:
+	case PICK:
 	    fileEntries = randomFileChanger.getRandomFiles(Integer.parseInt(args[1]));
 	    randomFileChanger.printEntries(fileEntries);
 	    break;
@@ -53,6 +50,9 @@ public class RandomFileChanger {
 	    String message = MESSAGE + new Date(System.currentTimeMillis());
 	    fileEntries = randomFileChanger.changeRandomFiles(Integer.parseInt(args[1]), message);
 	    randomFileChanger.printEntries(fileEntries);
+	    break;
+	case LIST:
+	    randomFileChanger.printSpeakers(randomFileChanger.getAllFiles());
 	    break;
 	case ILLEGAL:
 	default:
@@ -64,6 +64,11 @@ public class RandomFileChanger {
 	if (args == null) {
 	    return Mode.ILLEGAL;
 	}
+	if (args.length == 1){
+	  if (args[0].equals(Mode.LIST.modeCommando)){
+	      return Mode.LIST;
+	  }
+	}
 	if (args.length == 2) {
 	    try {
 		Integer.parseInt(args[1]);
@@ -72,8 +77,8 @@ public class RandomFileChanger {
 	    }
 
 	    String mode = args[0];
-	    if (mode.equals(Mode.TEST.modeCommando)) {
-		return Mode.TEST;
+	    if (mode.equals(Mode.PICK.modeCommando)) {
+		return Mode.PICK;
 	    }
 
 	    if (mode.equals(Mode.CHANGE.modeCommando)) {
@@ -85,7 +90,9 @@ public class RandomFileChanger {
     }
 
     public static void printDisclaimer() {
-	System.out.println("No supported mode: Supported modes are " + NEWLINE + TAB + " --test <number of entries> and"
+	System.out.println("No supported mode: Supported modes are "
+		+ NEWLINE + TAB + " --list"
+		+ NEWLINE + TAB + " --pick <number of entries> "
 		+ NEWLINE + TAB + " --change <number of entries>");
 
     }
@@ -143,7 +150,7 @@ public class RandomFileChanger {
 	for (String key : activityMap.keySet()) {
 	    System.out.println(key + " : " + activityMap.get(key).size());
 	    for (FileEntry fileEntry : activityMap.get(key)) {
-		System.out.println("   " + fileEntry);
+		System.out.println("   " + fileEntry.name());
 	    }
 	}
 

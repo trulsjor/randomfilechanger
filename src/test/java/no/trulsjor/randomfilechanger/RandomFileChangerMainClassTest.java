@@ -95,7 +95,7 @@ public class RandomFileChangerMainClassTest {
     @Test
     public void shouldListCorrectNumberOfFilesInTest() throws Exception {
 	File mainoutput = redirectOutputToFile();
-	RandomFileChanger.main(new String[] { "--test", "2" });
+	RandomFileChanger.main(new String[] { "--pick", "2" });
 	List<String> outputLines = readFile(mainoutput);
 	assertEquals(2, outputLines.size());
 	cleanup(mainoutput);

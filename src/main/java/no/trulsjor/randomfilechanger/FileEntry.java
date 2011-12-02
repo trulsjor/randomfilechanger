@@ -87,4 +87,12 @@ public class FileEntry {
 	return "FileEntry [index=" + index + ", speaker=" + speaker + ", fileName=" + fileName + "]";
     }
 
+    public String name() {
+	try {
+	    return fileName.getCanonicalPath();
+	} catch (IOException e) {
+	    throw new RuntimeException(e);
+	}
+    }
+
 }
