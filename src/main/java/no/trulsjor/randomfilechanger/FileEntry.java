@@ -22,21 +22,21 @@ public class FileEntry {
 	this.index = index;
 	this.fileName = file;
 	this.touched = false;
-	this.speaker = findSpeaker();
-
+	this.speaker = "UNKOWN";
+	this.subject ="UNKOWN";
+	analyzeFileName();
+	
+	
     }
 
-    private String findSpeaker() {
-	String speaker = "UNKNOWN";
-	String fileNameAsString = fileName.getName();
-
+    private void analyzeFileName() {
+	String fileNameAsString = fileName.getName();	
 	if (fileNameAsString.contains("-")) {
-	    String speakerName = fileName.getName().substring(0, fileNameAsString.indexOf("-"));
-	    speaker = WordUtils.capitalize(speakerName.replaceAll("_", " "));
+	    speaker = WordUtils.capitalize(fileNameAsString.substring(0, fileNameAsString.indexOf("-")).replace("_", " "));
+	    subject = WordUtils.capitalize(fileNameAsString.substring(fileNameAsString.indexOf("-"), fileNameAsString.length()-4).replace("-", " ").replace("_", " "));
 	}
-	return speaker;
     }
-
+     
     public boolean hasFile(File file) {
 	return this.fileName.getAbsolutePath().equals(file.getAbsolutePath());
     }
@@ -80,6 +80,10 @@ public class FileEntry {
 
     public String getSpeaker() {
 	return speaker;
+    }
+    
+    public String getSubject() {
+	return subject;
     }
 
     @Override

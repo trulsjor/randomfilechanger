@@ -52,7 +52,7 @@ public class RandomFileChanger {
 	    randomFileChanger.printEntries(fileEntries);
 	    break;
 	case LIST:
-	    randomFileChanger.printSpeakers(randomFileChanger.getAllFiles());
+	    randomFileChanger.prettyPrintSpeakers(randomFileChanger.getAllFiles());
 	    break;
 	case ILLEGAL:
 	default:
@@ -132,7 +132,7 @@ public class RandomFileChanger {
 	}
     }
 
-    public void printSpeakers(Collection<FileEntry> entries) {
+    public void prettyPrintSpeakers(Collection<FileEntry> entries) {
 	TreeMap<String, List<FileEntry>> activityMap = new TreeMap<String, List<FileEntry>>();
 
 	for (FileEntry fileEntry : entries) {
@@ -147,12 +147,15 @@ public class RandomFileChanger {
 	    }
 	}
 
-	for (String key : activityMap.keySet()) {
-	    System.out.println(key + " : " + activityMap.get(key).size());
-	    for (FileEntry fileEntry : activityMap.get(key)) {
-		System.out.println(TAB + fileEntry.name());
+	
+	for (String speaker : activityMap.keySet()) {
+	    System.out.println(speaker + ":" + activityMap.get(speaker).size());
+	    for (FileEntry fileEntry : activityMap.get(speaker)) {
+		System.out.println(TAB + ">" + fileEntry.getSubject());
 	    }
 	}
+	
+	System.out.println(NEWLINE + "Total: " + entries.size() + " entries");
 
     }
 
