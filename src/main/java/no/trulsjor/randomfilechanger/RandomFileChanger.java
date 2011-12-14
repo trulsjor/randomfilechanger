@@ -149,9 +149,9 @@ public class RandomFileChanger {
 
 	
 	for (String speaker : activityMap.keySet()) {
-	    System.out.println(speaker + ":" + activityMap.get(speaker).size());
+	    System.out.println(speaker + " (" + activityMap.get(speaker).size() + ")");
 	    for (FileEntry fileEntry : activityMap.get(speaker)) {
-		System.out.println(TAB + ">" + fileEntry.getSubject());
+		System.out.println(TAB + "- " + fileEntry.getSubject() + " (" + fileEntry.getContext() + ")");
 	    }
 	}
 	
