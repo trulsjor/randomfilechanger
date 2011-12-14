@@ -129,6 +129,7 @@ public class RandomFileChanger {
     public void printEntries(Collection<FileEntry> entries) {
 	for (FileEntry fileEntry : entries) {
 	    System.out.println(fileEntry);
+	    
 	}
     }
 

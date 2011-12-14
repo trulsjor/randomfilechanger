@@ -1,6 +1,7 @@
 package no.trulsjor.randomfilechanger;
 
 import static no.trulsjor.randomfilechanger.SystemConstants.NEWLINE;
+import static no.trulsjor.randomfilechanger.SystemConstants.TAB;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -23,10 +24,9 @@ public class FileEntry {
 	this.fileName = file;
 	this.touched = false;
 	this.speaker = "UNKOWN";
-	this.subject ="UNKOWN";
+	this.subject = "UNKOWN";
 	analyzeFileName();
-	
-	
+
     }
 
     private void analyzeFileName() {
@@ -34,10 +34,12 @@ public class FileEntry {
 	context = fileName.getParentFile().getName();
 	if (fileNameAsString.contains("-")) {
 	    speaker = WordUtils.capitalize(fileNameAsString.substring(0, fileNameAsString.indexOf("-")).replace("_", " "));
-	    subject = WordUtils.capitalize(fileNameAsString.substring(fileNameAsString.indexOf("-")+1, fileNameAsString.length()-4).replace("-", " ").replace("_", " "));
+	    subject = WordUtils.capitalize(fileNameAsString
+		    .substring(fileNameAsString.indexOf("-") + 1, fileNameAsString.length() - 4).replace("-", " ")
+		    .replace("_", " "));
 	}
     }
-     
+
     public boolean hasFile(File file) {
 	return this.fileName.getAbsolutePath().equals(file.getAbsolutePath());
     }
@@ -82,18 +84,18 @@ public class FileEntry {
     public String getSpeaker() {
 	return speaker;
     }
-    
+
     public String getSubject() {
 	return subject;
     }
-    
-    public String getContext(){
+
+    public String getContext() {
 	return context;
     }
 
     @Override
     public String toString() {
-	return "FileEntry [index=" + index + ", speaker=" + speaker + ", fileName=" + fileName + "]";
+	return speaker + " : "+ subject + " (" +context +")";
     }
 
     public String name() {
