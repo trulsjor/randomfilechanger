@@ -73,7 +73,7 @@ public class LoddtrekkerTest {
 	RandomFileChanger fileChanger = new RandomFileChanger(new File("loddtrekning_julemote"));
 	List<FileEntry> list = fileChanger.getAllFiles();
 	assertFalse(list.isEmpty());
-	fileChanger.printSpeakers(list);
+	fileChanger.prettyPrintSpeakers(list); 
     }
     
     
