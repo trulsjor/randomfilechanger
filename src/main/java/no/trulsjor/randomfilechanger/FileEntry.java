@@ -29,9 +29,9 @@ public class FileEntry {
     private String findSpeaker() {
 	String speaker = "UNKNOWN";
 	String fileNameAsString = fileName.getName();
-	
-	if (fileNameAsString.contains("-")){
-	    String speakerName =  fileName.getName().substring(0,fileNameAsString.indexOf("-"));
+
+	if (fileNameAsString.contains("-")) {
+	    String speakerName = fileName.getName().substring(0, fileNameAsString.indexOf("-"));
 	    speaker = WordUtils.capitalize(speakerName.replaceAll("_", " "));
 	}
 	return speaker;
@@ -88,11 +88,9 @@ public class FileEntry {
     }
 
     public String name() {
-	try {
-	    return fileName.getCanonicalPath();
-	} catch (IOException e) {
-	    throw new RuntimeException(e);
-	}
+
+	return fileName.getName();
+
     }
 
 }

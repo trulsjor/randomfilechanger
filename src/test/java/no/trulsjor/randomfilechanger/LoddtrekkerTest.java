@@ -1,5 +1,6 @@
 package no.trulsjor.randomfilechanger;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -74,7 +75,8 @@ public class LoddtrekkerTest {
 	assertFalse(list.isEmpty());
 	//fileChanger.printSpeakers(list);
     }
-
+    
+    
     @After
     public void deleteSimpleDir() throws Exception {
 	assertTrue(deleteDirectory(new File(SIMPLE_DIR)));

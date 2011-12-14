@@ -150,7 +150,7 @@ public class RandomFileChanger {
 	for (String key : activityMap.keySet()) {
 	    System.out.println(key + " : " + activityMap.get(key).size());
 	    for (FileEntry fileEntry : activityMap.get(key)) {
-		System.out.println("   " + fileEntry.name());
+		System.out.println(TAB + fileEntry.name());
 	    }
 	}
 
